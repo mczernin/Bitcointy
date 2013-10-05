@@ -18,4 +18,5 @@
             %div
               %span
                 = yield
-              .error-code="Error code: #{@random_error_code}"
+              .error-code="Error code: #{@random_error_code}" 
+              .error-code="Requested from: #{@ip[0].country}. Answered from: #{@public_ip[0].country}" 
