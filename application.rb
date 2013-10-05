@@ -3,7 +3,19 @@
 require 'sinatra'
 require 'haml'
 
-
+module Rack
+  class Request
+    def subdomains(tld_len=1) # we set tld_len to 1, use 2 for co.uk or similar
+      # cache the result so we only compute it once.
+      @env['rack.env.subdomains'] ||= lambda {
+        # check if the current host is an IP address, if so return an empty array
+        return [] if (host.nil? ||
+                      /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.match(host))
+        host.split('.')[0...(1 - tld_len - 2)] # pull everything except the TLD
+      }.call
+    end
+  end
+end
 
 
 configure do
@@ -40,7 +52,7 @@ get '/' do
   @public_ip = Geocoder.search(@remote_ip)
   
   if @ip[0].country_code != "US"
-    redirect 'http://eu.pmerino.me'
+    redirect 'http://eu.pmerino.me' unless request.host == "eu.pmerino.me"
   else
   
     error_codes = ["ERR_SERVER_GONE_BANANAS", "ERR_DONT_CARE", "ERR_SYSTEM_FAILURE", "ERR_PROJECT_X_FAIL", "ERR_DOGS_CHEWING_MODEM", "ERR_NOPE", "ERR_LINUX_AINT_UNIX", "ERR_LS_NOT_FOUND", "ERR_GOVT_SHUTDOWN"]
