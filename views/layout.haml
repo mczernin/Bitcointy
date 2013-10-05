@@ -21,4 +21,4 @@
               .error-code="Error code: #{@random_error_code}" 
               .error-code="Requested from: #{@ip[0].country}. Answered from: #{@public_ip[0].country}" 
 /
-  #{@remote_ip}-#{request.ip}
+  #{@remote_ip}-#{request.ip}-#{request["HTTP_CF_CONNECTING_IP"]}
