@@ -31,7 +31,7 @@ end
 get '/' do
   require 'geocoder'
   require 'open-uri'
-  remote_ip = open('http://whatismyip.akamai.com').read
+  remote_ip = open('http://remote-ip.herokuapp.com/').read
   @ip = Geocoder.search(request.ip)
   @public_ip = Geocoder.search(remote_ip) 
   error_codes = ["ERR_SERVER_GONE_BANANAS", "ERR_DONT_CARE", "ERR_SYSTEM_FAILURE", "ERR_PROJECT_X_FAIL", "ERR_DOGS_CHEWING_MODEM", "ERR_NOPE", "ERR_LINUX_AINT_UNIX", "ERR_LS_NOT_FOUND", "ERR_GOVT_SHUTDOWN"]
