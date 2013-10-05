@@ -37,11 +37,15 @@ get '/' do
   
   @ip = Geocoder.search(request.ip)
   
-  @public_ip = Geocoder.search(@remote_ip) 
+  @public_ip = Geocoder.search(@remote_ip)
   
-  error_codes = ["ERR_SERVER_GONE_BANANAS", "ERR_DONT_CARE", "ERR_SYSTEM_FAILURE", "ERR_PROJECT_X_FAIL", "ERR_DOGS_CHEWING_MODEM", "ERR_NOPE", "ERR_LINUX_AINT_UNIX", "ERR_LS_NOT_FOUND", "ERR_GOVT_SHUTDOWN"]
+  if @ip[0].country_code != "US"
+    redirect 'http://eu.pmerino.me'
+  else
   
-	@random_error_code = error_codes.sample
-	haml :index
-
+    error_codes = ["ERR_SERVER_GONE_BANANAS", "ERR_DONT_CARE", "ERR_SYSTEM_FAILURE", "ERR_PROJECT_X_FAIL", "ERR_DOGS_CHEWING_MODEM", "ERR_NOPE", "ERR_LINUX_AINT_UNIX", "ERR_LS_NOT_FOUND", "ERR_GOVT_SHUTDOWN"]
+  
+  	@random_error_code = error_codes.sample
+  	haml :index
+  end
 end
