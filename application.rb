@@ -52,7 +52,7 @@ get '/' do
   @public_ip = Geocoder.search(@remote_ip)
   
   if ENV['RACK_ENV'] == "production"
-    if @ip[0].country_code != "US" and request.host != "eu.pmerino.me" 
+    if !["US", "AU", "CA"].include?(@ip[0].country_code) and request.host != "eu.pmerino.me" 
       redirect 'http://eu.pmerino.me' 
     end
   end
