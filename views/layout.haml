@@ -12,4 +12,14 @@
     #container
       #inside
         %h1 Bitcointy
+        %h2#price="1 BTC = $#{average_price("USD")}"
+        .clearfix
+        
         = yield
+        %hr
+        %p
+          Proudly made by
+          %a{:href => "http://pmerino.me", :target => '_blank'} Pablo Merino.
+          Site design by
+          %a{:href => "http://sebj.me", :target => '_blank'} Seb Jachec.
+          

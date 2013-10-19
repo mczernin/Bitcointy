@@ -1,6 +1,3 @@
-
-%h2#price="1 BTC = $#{get_price("USD", "blockchain")}"
-.clearfix
 %p#subheading See the value of a Bitcoin according to different sources with a simple JSON API.
 %p All major currencies are supported (USD, EUR, GBP, CAD, JPY, CNY etc.)
 
@@ -9,7 +6,15 @@
 :markdown
   - `GET /price/:currency` to get the plain text conversion for a currency
   - `GET /all/:currency` to get all the conversion rates in all sources for a currency
-  - `GET /:ticker/:currency` to get the conversion rates in a source (`blockchain`, `mtgox`, `btccharts`) for a currency
+  - `GET /:ticker/:currency` to get the conversion rates in a source (see next section for available providers) for a currency
+  - `GET /average/:currency` to get an average price based on all the providers for a currency
+  
+%h2 Currently available providers
+:markdown
+  - [BlockChain](http://blockchain.info) (`blockchain`)
+  - [MtGox](http://mtgox.com) (`mtgox`)
+  - [Bitcoin Charts](http://bitcoincharts.com) (`btccharts`)
+  - [Coinbase](https://coinbase.com) (`coinbase`)
   
 %h2 Graphs (Data from Blockchain)
 

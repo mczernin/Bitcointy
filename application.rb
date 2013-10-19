@@ -38,6 +38,8 @@ end
 
 helpers do
 
+  EXCHANGES = ["blockchain", "mtgox", "btccharts", "coinbase"]
+
 	def partial(page, options={})
 		haml page.to_sym, options.merge!(:layout => false)
 	end
@@ -48,15 +50,19 @@ helpers do
     when "blockchain"
       json = HTTParty.get("http://blockchain.info/en/ticker").body
       parsed_json = JSON.parse(json)
-      @value = parsed_json[currency]["buy"]
+      @value = (parsed_json[currency]["buy"]).to_f.round(2)
     when "mtgox"
       json = HTTParty.get("http://data.mtgox.com/api/2/BTC#{currency}/money/ticker_fast").body
       parsed_json = JSON.parse(json)
-      @value = parsed_json["data"]["buy"]["value"]
+      @value = (parsed_json["data"]["buy"]["value"]).to_f.round(2)
     when "btccharts"
       json = HTTParty.get("http://api.bitcoincharts.com/v1/weighted_prices.json").body
       parsed_json = JSON.parse(json)
-      @value = parsed_json[currency]["24h"]
+      @value = (parsed_json[currency]["24h"]).to_f.round(2)
+    when 'coinbase'
+      json = HTTParty.get("https://coinbase.com/api/v1/currencies/exchange_rates").body
+      parsed_json = JSON.parse(json)
+      @value = (parsed_json["btc_to_#{currency.downcase}"]).to_f.round(2)
     else
       return false
     end
@@ -96,6 +102,17 @@ helpers do
     end
     content - content.slice(0, content.length - 20)     
   end
+  
+  def average_price(currency)
+    
+    prices = []
+  
+    EXCHANGES.each do |exchange|
+      prices << get_price(currency, exchange)
+    end
+    (prices.inject(0.0) { |sum, el| sum.to_f + el.to_f } / prices.size).round(2)
+    
+  end
 	
 end
 
@@ -126,14 +143,23 @@ get '/price/:currency' do |currency|
   get_price(currency, "blockchain").to_s
 end
 
+get '/average/:currency' do |currency|
+  content_type 'text/json'
+
+  average = average_price(currency)  
+  
+  response = {:currency => currency.upcase, :value => average}
+  
+  response.to_json
+
+end
+
 get '/all/:currency' do |currency|
   content_type 'text/json'
-  
-  exchanges = ["blockchain", "mtgox", "btccharts"]
-  
+    
   response = []
   
-  exchanges.each do |exchange|
+  EXCHANGES.each do |exchange|
     response << {:exchange => exchange, :currency => currency.upcase, :value => get_price(currency, exchange)}
   end
   

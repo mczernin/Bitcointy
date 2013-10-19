@@ -93,3 +93,7 @@ canvas {
   left: 0;
   width: 900px;
 }
+
+hr {
+  border:1px solid #AAA;
+}
