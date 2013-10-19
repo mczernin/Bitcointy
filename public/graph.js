@@ -4,6 +4,12 @@ $(function() {
     jQuery.get("price/usd", function(data) {
       $("h3.price").html("1BTC == US$" + data + " (updated " + new Date().getHours() + ":" + new Date().getMinutes() + ")")
     });
+    jQuery.get("charts/price", function(data) {
+      $("#circulation-chart").data("circulation", data);
+    });
+    jQuery.get("charts/price?price=yes", function(data) {
+      $("#circulation-chart").data("circulation-price", data);
+    });
   }
   
   setInterval(updatePrice, 1000);

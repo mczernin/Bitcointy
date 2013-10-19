@@ -103,6 +103,24 @@ get '/' do
   haml :index
 end
 
+get '/charts/:type' do |type|
+  content_type 'text/json'
+  case type.to_sym
+  when :circulation
+    if params[:date]
+      btc_in_circulation(true).to_json
+    else
+      btc_in_circulation.to_json
+    end
+  when :price
+    if params[:date]
+      market_price(true).to_json
+    else
+      market_price.to_json
+    end
+  end
+end
+
 get '/price/:currency' do |currency|
   content_type 'text/plain'
   get_price(currency, "blockchain").to_s
@@ -142,3 +160,4 @@ get '/:exchange/:currency' do |exchange, currency|
     response.to_json
   end
 end
+
