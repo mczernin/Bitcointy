@@ -70,6 +70,11 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  color: #6E6042;
+  text-decoration: underline;
+}
+
 code {
   background-color: #F9F2E3;
   border-radius: 2px;
