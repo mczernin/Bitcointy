@@ -1,24 +1,15 @@
 !!!
 %html
   %head
-    %title="Pablo Merino"
+    %title="BTC Ticker"
     %link{:href => '/main.css', :rel => 'stylesheet', :type => 'text/css'}
+    
+    %script{:src=>"https://rawgithub.com/nnnick/Chart.js/master/Chart.min.js"}
+    %script{:src=>"//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"}
+    %script{:src=>"/graph.js"}
+    
+    
   %body
-    #main-frame-error
-      #box
-        #content-top
-          %h1
-            %span Pablo Merino
-          %a#reload-button{:href=>"https://twitter.com/_pmerino", :target=>"_blank"} Twitter
-          %a#reload-button{:href=>'https://alpha.app.net/pmerino', :rel=>'me', :target=>"_blank"} App.net
-          %a#reload-button{:href=>"mailto:pablo@wearemocha.com"} E-mail
-          %a#reload-button{:href=>"https://github.com/Pablo-Merino", :target=>"_blank"} GitHub
-          %a#reload-button{:href=>"http://pablo.roon.io/", :target=>"_blank"} Blog
-          
-        #help-box-outer
-          #help-box-inner
-            %div
-              %span
-                = yield
-              .error-code="Error code: #{@random_error_code}" 
-              .error-code="Requested from: #{@ip[0].country}. Answered from: #{@public_ip[0].country}" 
+    .container
+      %h1 Bitcointy, a simple BTC ticker
+      = yield
