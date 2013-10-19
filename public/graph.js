@@ -3,7 +3,7 @@ $(function() {
   var updatePrice = function() {
     jQuery.get("price/usd", function(data) {
       $("h2#price").fadeOut('fast',function(){
-        $("h2#price").html("1BTC = $" + data + " (updated " + new Date().getHours() + ":" + new Date().getMinutes() + ")")
+        $("h2#price").html("1 BTC = $" + data + " (updated " + new Date().getHours() + ":" + new Date().getMinutes() + ")")
       }).fadeIn("fast");
     });
   }
