@@ -1,13 +1,13 @@
 $(function() {
   
   var updatePrice = function() {
-    jQuery.get("average/usd", function(data) {
+    jQuery.get("average/usd?date=yes", function(data) {
       $("h2#price").fadeOut('fast',function(){
-        $("h2#price").html("1 BTC = $" + data.value + " (updated " + new Date().getUTCHours() + ":" + new Date().getUTCMinutes() + ")")
+        $("h2#price").html("1 BTC = $" + data.value + " (updated " + data.date + ")")
       }).fadeIn("fast");
     });
   }
-  
+  updatePrice();
   setInterval(updatePrice, 5500);
   
   var options = {

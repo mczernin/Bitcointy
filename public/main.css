@@ -90,8 +90,8 @@ li {
 
 canvas {
   height: 400px;
-  left: 0;
-  width: 900px;
+  margin: 5px 0 0 -32px;
+  width: 910px;
 }
 
 hr {

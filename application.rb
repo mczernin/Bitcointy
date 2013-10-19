@@ -147,8 +147,11 @@ get '/average/:currency' do |currency|
   content_type 'text/json'
 
   average = average_price(currency)  
-  
-  response = {:currency => currency.upcase, :value => average}
+  if params[:date]
+    response = {:currency => currency.upcase, :value => average, :date => Time.now.strftime("%I:%M %p").to_s}
+  else
+    response = {:currency => currency.upcase, :value => average}
+  end
   
   response.to_json
 
