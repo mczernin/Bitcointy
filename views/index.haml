@@ -1,21 +1,21 @@
 
-%h3.price="1BTC == US$#{get_price("USD", "blockchain")}"
+%h2#price="1BTC == US$#{get_price("USD", "blockchain")}"
+.clearfix
+%p#subheading See the value of a Bitcoin according to different sources with a simple JSON API.
+%p All major currencies are supported (USD, EUR, GBP, CAD, JPY, CNY etc.)
 
-%p See what's the value of Bitcoins according to different sources with a simple JSON API!
+%h2 API Endpoints
 
-%p The current endpoints are:
 :markdown
-  - `GET /price/:currency` to get the plain text conversion in the currency you specify
-  - `GET /all/:currency` to get all the conversion rates in all the sources in the currency you specify
-  - `GET /:ticker/:currency` to get the conversion rates in the specified source (`blockchain`, `mtgox`, `btccharts`) in the currency you specify
+  - `GET /price/:currency` to get the plain text conversion for a currency
+  - `GET /all/:currency` to get all the conversion rates in all sources for a currency
+  - `GET /:ticker/:currency` to get the conversion rates in a source (`blockchain`, `mtgox`, `btccharts`) for a currency
   
-%p Big currencies are supported (USD, EUR, CAD, JPY, CNY,...)
+%h2 Graphs (Data from Blockchain)
 
-%p Now some graphs (data from Blockchain!):
-
-%h4 BTCs in circulation
+%h3 BTCs in circulation
 %canvas#circulation-chart{:width=>"900", :height=>"400", :"data-circulation" => btc_in_circulation.to_json, :"data-circulation-dates" => btc_in_circulation(true).to_json}
 
-%h4 Market Price (USD)
+%h3 Market Price (USD)
 %canvas#market-price-chart{:width=>"900", :height=>"400", :"data-market-price" => market_price.to_json, :"data-market-price-dates" => market_price(true).to_json}
 

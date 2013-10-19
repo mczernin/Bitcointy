@@ -4,18 +4,12 @@ $(function() {
     jQuery.get("price/usd", function(data) {
       $("h3.price").html("1BTC == US$" + data + " (updated " + new Date().getHours() + ":" + new Date().getMinutes() + ")")
     });
-    jQuery.get("charts/price", function(data) {
-      $("#circulation-chart").data("circulation", data);
-    });
-    jQuery.get("charts/price?price=yes", function(data) {
-      $("#circulation-chart").data("circulation-price", data);
-    });
   }
   
   setInterval(updatePrice, 1000);
   
   var options = {
-  	animation : false,
+  	animation : true,
     bezierCurve:false 
   }
   
@@ -25,9 +19,9 @@ $(function() {
   	labels : $("#circulation-chart").data("circulation-dates"),
   	datasets : [
   		{
-  			fillColor : "rgba(151,187,205,0.5)",
-  			strokeColor : "rgba(151,187,205,1)",
-  			pointColor : "rgba(151,187,205,1)",
+  			fillColor : "rgba(230,171,39,0.5)",
+  			strokeColor : "rgba(230,171,39,1)",
+  			pointColor : "rgba(230,171,39,1)",
   			pointStrokeColor : "#fff",
   			data : $("#circulation-chart").data("circulation")
   		}
@@ -37,7 +31,7 @@ $(function() {
 
   var ctx = $("#circulation-chart").get(0).getContext("2d");
 
-  var myNewChart = new Chart(ctx).Line(dataCirculation, options);
+  var circulationChart = new Chart(ctx).Line(dataCirculation, options);
 
   // - - - - - - - - - - - - - Current USD Market Price  - - - - - - - - - - - - - - //
   
@@ -45,10 +39,10 @@ $(function() {
   	labels : $("#market-price-chart").data("market-price-dates"),
   	datasets : [
   		{
-  			fillColor : "rgba(151,187,205,0.5)",
-  			strokeColor : "rgba(151,187,205,1)",
-  			pointColor : "rgba(151,187,205,1)",
-  			pointStrokeColor : "#fff",
+  			fillColor : "rgba(230,171,39,0.5)",
+        strokeColor : "rgba(230,171,39,1)",
+        pointColor : "rgba(230,171,39,1)",
+        pointStrokeColor : "#fff",
   			data : $("#market-price-chart").data("market-price")
   		}
       
@@ -57,6 +51,6 @@ $(function() {
 
   var ctx = $("#market-price-chart").get(0).getContext("2d");
 
-  var myNewChart = new Chart(ctx).Line(dataMarketPrice, options);
+  var marketPriceChart = new Chart(ctx).Line(dataMarketPrice, options);
     
 })
