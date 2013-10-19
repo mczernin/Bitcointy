@@ -77,7 +77,7 @@ helpers do
         content << item["y"]
       end
     end
-    content - content.slice(0, content.length - 10)
+    content - content.slice(0, content.length - 50)
   end
   
   def market_price(dates=false)
