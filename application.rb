@@ -127,18 +127,15 @@ get '/charts/:type' do |type|
   content_type 'text/json'
   case type.to_sym
   when :circulation
-    if params[:date]
-      btc_in_circulation(true).to_json
-    else
-      btc_in_circulation.to_json
-    end
+    {:date => btc_in_circulation(true), :values => btc_in_circulation}.to_json
   when :price
-    if params[:date]
-      market_price(true).to_json
-    else
-      market_price.to_json
-    end
+    {:date => market_price(true), :values => market_price}.to_json
+  when :transactions
+    {:date => number_of_transactions(true), :values => number_of_transactions}.to_json
+  else
+    {:error => true}.to_json
   end
+
 end
 
 get '/price/:currency' do |currency|
