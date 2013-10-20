@@ -99,6 +99,23 @@ helpers do
     (prices.inject(0.0) { |sum, el| sum.to_f + el.to_f } / prices.size).round(2)
     
   end
+  
+  def number_of_transactions(dates=false) 
+    json = HTTParty.get("http://blockchain.info/charts/n-transactions?format=json").body
+    parsed_json = JSON.parse(json)
+    return_data = parsed_json["values"]
+    content = []
+    if dates
+      return_data.each do |item|
+        content << Time.at(item["x"]).strftime("%d/%m/%Y")
+      end
+    else
+      return_data.each do |item|
+        content << item["y"]
+      end
+    end
+    content - content.slice(0, content.length - 60)  
+  end
 	
 end
 

@@ -56,5 +56,25 @@ $(function() {
   var ctx = $("#market-price-chart").get(0).getContext("2d");
 
   var marketPriceChart = new Chart(ctx).Line(dataMarketPrice, options);
+  
+  // - - - - - - - - - - - - - Current USD Market Price  - - - - - - - - - - - - - - //
+  
+  var dataTransactions = {
+  	labels : $("#transactions-chart").data("transactions-dates"),
+  	datasets : [
+  		{
+  			fillColor : "rgba(230,171,39,0.5)",
+        strokeColor : "rgba(230,171,39,1)",
+        pointColor : "rgba(230,171,39,1)",
+        pointStrokeColor : "#fff",
+  			data : $("#transactions-chart").data("transactions")
+  		}
+      
+  	]
+  }
+
+  var ctx = $("#transactions-chart").get(0).getContext("2d");
+
+  var transactionsChart = new Chart(ctx).Line(dataTransactions, options);
     
 })

@@ -24,3 +24,6 @@
 %h3 Market Price (USD)
 %canvas#market-price-chart{:width=>"970", :height=>"400", :"data-market-price" => market_price.to_json, :"data-market-price-dates" => market_price(true).to_json}
 
+%h3 Number of transactions
+%canvas#transactions-chart{:width=>"970", :height=>"400", :"data-transactions" => number_of_transactions.to_json, :"data-transactions-dates" => number_of_transactions(true).to_json}
+
