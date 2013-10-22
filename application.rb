@@ -37,7 +37,11 @@ helpers do
       http_request = HTTParty.get("http://blockchain.info/en/ticker")
       if http_request.code == 200
         parsed_json = JSON.parse(http_request.body)
-        @value = (parsed_json[currency]["buy"]).to_f.round(2)
+        if parsed_json[currency].nil?
+          @value = false
+        else
+          @value = (parsed_json[currency]["buy"]).to_f.round(2)
+        end
       else
         @value = false
       end
@@ -53,7 +57,11 @@ helpers do
       http_request = HTTParty.get("http://api.bitcoincharts.com/v1/weighted_prices.json")
       if http_request.code == 200
         parsed_json = JSON.parse(http_request.body)
-        @value = (parsed_json[currency]["24h"]).to_f.round(2)
+        if parsed_json[currency].nil?
+          @value = false
+        else
+          @value = (parsed_json[currency]["24h"]).to_f.round(2)
+        end
       else
         @value = false
       end
@@ -61,7 +69,11 @@ helpers do
       http_request = HTTParty.get("https://coinbase.com/api/v1/currencies/exchange_rates")
       if http_request.code == 200
         parsed_json = JSON.parse(http_request.body)
-        @value = (parsed_json["btc_to_#{currency.downcase}"]).to_f.round(2)
+        if parsed_json["btc_to_#{currency.downcase}"].nil?
+          @value = false
+        else
+          @value = (parsed_json["btc_to_#{currency.downcase}"]).to_f.round(2)
+        end
       else
         @value = false
       end
@@ -116,6 +128,7 @@ helpers do
     EXCHANGES.each do |exchange|
       prices << get_price(currency, exchange)
     end
+    prices.delete_if { |el| el == false }
     (prices.inject(0.0) { |sum, el| sum.to_f + el.to_f } / prices.size).round(2)
     
   end
@@ -165,28 +178,51 @@ get '/convert/:amount/:currency' do |amount, currency|
   avg_price = average_price(currency)
   
   converted_rate = (amount.to_f * avg_price).round(2)
+  if !converted_rate.nan?
+    {
+      :currency => currency.upcase,
+      :value => converted_rate
+    }.to_json
+  else  
+    {
+      :error => true,
+      :description => "Error! Probably a unexistant currency"
+    }.to_json
+  end
   
-  {:currency => currency.upcase, :value => converted_rate}.to_json
   
 end
 
 get '/price/:currency' do |currency|
   content_type 'text/plain'
-  get_price(currency, "blockchain").to_s
+  price = get_price(currency, "blockchain")
+  if price
+    price.to_s
+  else  
+    {
+      :error => true,
+      :description => "Error! Probably a unexistant currency"
+    }.to_json
+  end
+
 end
 
 get '/average/:currency' do |currency|
   content_type 'text/json'
-
   average = average_price(currency)  
-  if params[:date]
-    response = {:currency => currency.upcase, :value => average, :date => Time.now.strftime("%I:%M %p").to_s}
+  
+  if !average.nan?
+    {
+      :currency => currency.upcase,
+      :value => average
+    }.to_json
   else
-    response = {:currency => currency.upcase, :value => average}
+    {
+      :error => true,
+      :description => "Error! Probably a unexistant currency"
+    }.to_json
   end
   
-  response.to_json
-
 end
 
 get '/all/:currency' do |currency|
@@ -197,8 +233,16 @@ get '/all/:currency' do |currency|
   EXCHANGES.each do |exchange|
     response << {:exchange => exchange, :currency => currency.upcase, :value => get_price(currency, exchange)}
   end
+  map = response.map {|item| item[:value] }
+  if map.uniq.length != 1 && map.uniq != [false]
+    response.to_json
+  else
+    {
+      :error => true,
+      :description => "Error! Probably a unexistant currency"
+    }.to_json
+  end
   
-  response.to_json
 end
 
 get '/:exchange/:currency' do |exchange, currency|
@@ -216,7 +260,7 @@ get '/:exchange/:currency' do |exchange, currency|
   else
     response = {
       :error => true,
-      :description => "Unknown error!"
+      :description => "Error! Probably a unexistant currency or wrong exchange"
     }
     response.to_json
   end
