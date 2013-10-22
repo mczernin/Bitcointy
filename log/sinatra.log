@@ -553,4 +553,176 @@ Haml::SyntaxError - Illegal element: classes and ids must have values.:
 	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-1.5.2/lib/rack/handler/webrick.rb:60:in `service'
 	/Volumes/Datos/Usuarios/pablo/.rvm/rubies/ruby-2.0.0-p0/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
 	/Volumes/Datos/Usuarios/pablo/.rvm/rubies/ruby-2.0.0-p0/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+	/Volumes/Datos/Usuarios/pablo/.rvm/rubies/ruby-2.0.0-p0/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'JSON::ParserError - 757: unexpected token at '<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en-US"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en-US"> <!--<![endif]-->
+<head>
+
+
+<meta http-equiv="set-cookie" content="cf_use_ob=0; expires=Tue, 22-Oct-13 10:42:53 GMT; path=/">
+
+
+<title>blockchain.info | 522: Connection timed out</title>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+<link rel="stylesheet" id="cf_styles-css" href="/cdn-cgi/styles/cf.errors.css" type="text/css" media="screen,projection" />
+<!--[if lt IE 9]><link rel="stylesheet" id='cf_styles-ie-css' href="/cdn-cgi/styles/cf.errors.ie.css" type="text/css" media="screen,projection" /><![endif]-->
+<style type="text/css">body{margin:0;padding:0}</style>
+<!--[if lt IE 9]><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><![endif]-->
+<!--[if gte IE 9]><!--><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script><!--<![endif]-->
+<script type="text/javascript" src="/cdn-cgi/scripts/cf.common.js"></script>
+
+</head>
+<body>
+<div id="cf-wrapper">
+
+    
+
+    <div id="cf-error-details" class="cf-error-details-wrapper">
+        <div class="cf-wrapper cf-error-overview">
+            <h1>
+              <span class="cf-error-type" data-translate="error">Error</span>
+              <span class="cf-error-code">522</span>
+              <small style="font-size:15px;white-space:nowrap">Ray ID: c15944356be014b</small>
+            </h1>
+            <h2 class="cf-subheadline" data-translate="error_desc">Connection timed out</h2>
+        </div><!-- /.error-overview -->
+
+        <div class="cf-section cf-highlight cf-status-display">
+            <div class="cf-wrapper">
+                <div class="cf-columns cols-3">
+                  
+<div id="cf-browser-status" class="cf-column cf-status-item cf-browser-status ">
+  <div class="cf-icon-error-container">
+    <i class="cf-icon cf-icon-browser"></i>
+    <i class="cf-icon-status cf-icon-ok"></i>
+  </div>
+  <span class="cf-status-desc" data-translate="browser_desc">You</span>
+  <h3 class="cf-status-name" data-translate="browser_label">Browser</h3>
+  <span class="cf-status-label" data-translate="browser_status_label">Working</span>
+</div>
+
+<div id="cf-cloudflare-status" class="cf-column cf-status-item cf-cloudflare-status ">
+  <div class="cf-icon-error-container">
+    <i class="cf-icon cf-icon-cloud"></i>
+    <i class="cf-icon-status cf-icon-ok"></i>
+  </div>
+  <span class="cf-status-desc" data-translate="cloud_desc">Paris</span>
+  <h3 class="cf-status-name" data-translate="cloud_label">CloudFlare</h3>
+  <span class="cf-status-label" data-translate="cloud_status_label">Working</span>
+</div>
+
+<div id="cf-host-status" class="cf-column cf-status-item cf-host-status cf-error-source">
+  <div class="cf-icon-error-container">
+    <i class="cf-icon cf-icon-server"></i>
+    <i class="cf-icon-status cf-icon-error"></i>
+  </div>
+  <span class="cf-status-desc" data-translate="server_desc">blockchain.info</span>
+  <h3 class="cf-status-name" data-translate="server_label">Host</h3>
+  <span class="cf-status-label" data-translate="server_status_label">Error</span>
+</div>
+
+                </div>
+            </div>
+        </div><!-- /.status-display -->
+
+        <div class="cf-section cf-wrapper">
+            <div class="cf-columns two">
+                <div class="cf-column">
+                    <h2 data-translate="what_happened">What happened?</h2>
+                    <p data-translate="connection_timed_out">The initial connection between CloudFlare's network and the origin web server timed out. As a result, the web page can not be displayed.</p>
+                </div>
+
+                <div class="cf-column">
+                    <h2 data-translate="what_can_i_do">What can I do?</h2>
+                          <h5 data-translate="if_website_visitor">If you're a visitor of this website:</h5>
+      <p data-translate="try_again_in_a_few">Please try again in a few minutes.</p>
+
+      <h5 data-translate="if_website_owner">If you're the owner of this website:</h5>
+      <p><span data-translate="522_owner_desc">Contact your hosting provider letting them know your web server is not completing requests. An Error 522 means that the request was able to connect to your web server, but that the request didn't finish. The most likely cause is that something on your server is hogging resources.</span> <a href="https://support.cloudflare.com/entries/23670002-Error-522" data-translate="addtl_troubleshooting">Additional troubleshooting information here.</a></p>
+                </div>
+            </div>
+        </div><!-- /.section -->
+
+        <div class="cf-error-footer cf-wrapper">
+  <p>
+    <span class="cf-footer-item">CloudFlare Ray ID: <strong>c15944356be014b</strong></span>
+    <span class="cf-footer-separator">&bull;</span>
+    <span class="cf-footer-item"><span data-translate="your_ip">Your IP</span>: 84.125.96.20</span>
+    <span class="cf-footer-separator">&bull;</span>
+    <span class="cf-footer-item"><a data-orig-proto="https" data-orig-ref="cloudflare.com/support" id="support_link" data-translate="help" target="_blank">Help</a></span>
+    <span class="cf-footer-separator">&bull;</span>
+    <span class="cf-footer-item"><span data-translate="performance_security_by">Performance &amp; security by</span> <a data-orig-proto="https" data-orig-ref="cloudflare.com" id="cloudflare_link" target="_blank">CloudFlare</a></span>
+    
+  </p>
+</div><!-- /.error-footer -->
+
+
+    </div><!-- /#cf-error-details -->
+</div><!-- /#cf-wrapper -->
+':
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/json-1.8.1/lib/json/common.rb:155:in `parse'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/json-1.8.1/lib/json/common.rb:155:in `parse'
+	/Volumes/Datos/Usuarios/pablo/Dropbox/Workspace/Experimentos/Bitcointy/application.rb:38:in `get_price'
+	/Volumes/Datos/Usuarios/pablo/Dropbox/Workspace/Experimentos/Bitcointy/application.rb:97:in `block in average_price'
+	/Volumes/Datos/Usuarios/pablo/Dropbox/Workspace/Experimentos/Bitcointy/application.rb:96:in `each'
+	/Volumes/Datos/Usuarios/pablo/Dropbox/Workspace/Experimentos/Bitcointy/application.rb:96:in `average_price'
+	/Volumes/Datos/Usuarios/pablo/Dropbox/Workspace/Experimentos/Bitcointy/application.rb:143:in `block in <top (required)>'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:1540:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:1540:in `block in compile!'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:950:in `[]'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:950:in `block (3 levels) in route!'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:966:in `route_eval'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:950:in `block (2 levels) in route!'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:987:in `block in process_route'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:985:in `catch'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:985:in `process_route'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:948:in `block in route!'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:947:in `each'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:947:in `route!'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:1059:in `block in dispatch!'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:1041:in `block in invoke'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:1041:in `catch'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:1041:in `invoke'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:1056:in `dispatch!'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:882:in `block in call!'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:1041:in `block in invoke'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:1041:in `catch'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:1041:in `invoke'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:882:in `call!'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:870:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-protection-1.5.0/lib/rack/protection/xss_header.rb:18:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-protection-1.5.0/lib/rack/protection/path_traversal.rb:16:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-protection-1.5.0/lib/rack/protection/json_csrf.rb:18:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-protection-1.5.0/lib/rack/protection/base.rb:49:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-protection-1.5.0/lib/rack/protection/base.rb:49:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-protection-1.5.0/lib/rack/protection/frame_options.rb:31:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-1.5.2/lib/rack/logger.rb:15:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:205:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-1.5.2/lib/rack/head.rb:11:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-1.5.2/lib/rack/methodoverride.rb:21:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:175:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:1949:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:1449:in `block in call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:1726:in `synchronize'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:1449:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-1.5.2/lib/rack/lint.rb:49:in `_call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-1.5.2/lib/rack/lint.rb:37:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-1.5.2/lib/rack/showexceptions.rb:24:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-1.5.2/lib/rack/commonlogger.rb:33:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/sinatra-1.4.3/lib/sinatra/base.rb:212:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/shotgun-0.9/lib/shotgun/loader.rb:86:in `proceed_as_child'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/shotgun-0.9/lib/shotgun/loader.rb:31:in `call!'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/shotgun-0.9/lib/shotgun/loader.rb:18:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/shotgun-0.9/lib/shotgun/favicon.rb:12:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/shotgun-0.9/lib/shotgun/static.rb:14:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-1.5.2/lib/rack/builder.rb:138:in `call'
+	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p0/gems/rack-1.5.2/lib/rack/handler/webrick.rb:60:in `service'
+	/Volumes/Datos/Usuarios/pablo/.rvm/rubies/ruby-2.0.0-p0/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+	/Volumes/Datos/Usuarios/pablo/.rvm/rubies/ruby-2.0.0-p0/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
 	/Volumes/Datos/Usuarios/pablo/.rvm/rubies/ruby-2.0.0-p0/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'

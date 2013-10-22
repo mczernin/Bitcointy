@@ -34,21 +34,37 @@ helpers do
     currency = currency.upcase
     case exchange
     when "blockchain"
-      json = HTTParty.get("http://blockchain.info/en/ticker").body
-      parsed_json = JSON.parse(json)
-      @value = (parsed_json[currency]["buy"]).to_f.round(2)
+      http_request = HTTParty.get("http://blockchain.info/en/ticker")
+      if http_request.code == 200
+        parsed_json = JSON.parse(http_request.body)
+        @value = (parsed_json[currency]["buy"]).to_f.round(2)
+      else
+        @value = false
+      end
     when "mtgox"
-      json = HTTParty.get("http://data.mtgox.com/api/2/BTC#{currency}/money/ticker_fast").body
-      parsed_json = JSON.parse(json)
-      @value = (parsed_json["data"]["buy"]["value"]).to_f.round(2)
+      http_request = HTTParty.get("http://data.mtgox.com/api/2/BTC#{currency}/money/ticker_fast")
+      if http_request.code == 200
+        parsed_json = JSON.parse(http_request.body)
+        @value = (parsed_json["data"]["buy"]["value"]).to_f.round(2)
+      else
+        @value = false
+      end
     when "btccharts"
-      json = HTTParty.get("http://api.bitcoincharts.com/v1/weighted_prices.json").body
-      parsed_json = JSON.parse(json)
-      @value = (parsed_json[currency]["24h"]).to_f.round(2)
+      http_request = HTTParty.get("http://api.bitcoincharts.com/v1/weighted_prices.json")
+      if http_request.code == 200
+        parsed_json = JSON.parse(http_request.body)
+        @value = (parsed_json[currency]["24h"]).to_f.round(2)
+      else
+        @value = false
+      end
     when 'coinbase'
-      json = HTTParty.get("https://coinbase.com/api/v1/currencies/exchange_rates").body
-      parsed_json = JSON.parse(json)
-      @value = (parsed_json["btc_to_#{currency.downcase}"]).to_f.round(2)
+      http_request = HTTParty.get("https://coinbase.com/api/v1/currencies/exchange_rates")
+      if http_request.code == 200
+        parsed_json = JSON.parse(http_request.body)
+        @value = (parsed_json["btc_to_#{currency.downcase}"]).to_f.round(2)
+      else
+        @value = false
+      end
     else
       return false
     end
@@ -56,37 +72,41 @@ helpers do
   end
   
   def btc_in_circulation(dates=false)
-    json = HTTParty.get("http://blockchain.info/charts/total-bitcoins?format=json").body
-    parsed_json = JSON.parse(json)
-    return_data = parsed_json["values"]
-    content = []
-    if dates
-      return_data.each do |item|
-        content << Time.at(item["x"]).strftime("%d/%m/%Y")
+    http_request = HTTParty.get("http://blockchain.info/charts/total-bitcoins?format=json")
+    if http_request.code == 200
+      parsed_json = JSON.parse(http_request.body)
+      return_data = parsed_json["values"]
+      content = []
+      if dates
+        return_data.each do |item|
+          content << Time.at(item["x"]).strftime("%d/%m/%Y")
+        end
+      else
+        return_data.each do |item|
+          content << item["y"]
+        end
       end
-    else
-      return_data.each do |item|
-        content << item["y"]
-      end
+      content - content.slice(0, content.length - 50)
     end
-    content - content.slice(0, content.length - 50)
   end
   
   def market_price(dates=false)
-    json = HTTParty.get("http://blockchain.info/charts/market-price?format=json").body
-    parsed_json = JSON.parse(json)
-    return_data = parsed_json["values"]
-    content = []
-    if dates
-      return_data.each do |item|
-        content << Time.at(item["x"]).strftime("%d/%m/%Y")
+    http_request = HTTParty.get("http://blockchain.info/charts/market-price?format=json")
+    if http_request.code == 200
+      parsed_json = JSON.parse(http_request.body)
+      return_data = parsed_json["values"]
+      content = []
+      if dates
+        return_data.each do |item|
+          content << Time.at(item["x"]).strftime("%d/%m/%Y")
+        end
+      else
+        return_data.each do |item|
+          content << item["y"]
+        end
       end
-    else
-      return_data.each do |item|
-        content << item["y"]
-      end
+      content - content.slice(0, content.length - 20)
     end
-    content - content.slice(0, content.length - 20)     
   end
   
   def average_price(currency)
@@ -101,20 +121,22 @@ helpers do
   end
   
   def number_of_transactions(dates=false) 
-    json = HTTParty.get("http://blockchain.info/charts/n-transactions?format=json").body
-    parsed_json = JSON.parse(json)
-    return_data = parsed_json["values"]
-    content = []
-    if dates
-      return_data.each do |item|
-        content << Time.at(item["x"]).strftime("%d/%m/%Y")
+    http_request = HTTParty.get("http://blockchain.info/charts/n-transactions?format=json")
+    if http_request.code == 200
+      parsed_json = JSON.parse(http_request.body)
+      return_data = parsed_json["values"]
+      content = []
+      if dates
+        return_data.each do |item|
+          content << Time.at(item["x"]).strftime("%d/%m/%Y")
+        end
+      else
+        return_data.each do |item|
+          content << item["y"]
+        end
       end
-    else
-      return_data.each do |item|
-        content << item["y"]
-      end
+      content - content.slice(0, content.length - 60)  
     end
-    content - content.slice(0, content.length - 60)  
   end
 	
 end
@@ -136,6 +158,16 @@ get '/charts/:type' do |type|
     {:error => true}.to_json
   end
 
+end
+
+get '/convert/:amount/:currency' do |amount, currency|
+  content_type 'text/json'
+  avg_price = average_price(currency)
+  
+  converted_rate = (amount.to_f * avg_price).round(2)
+  
+  {:currency => currency.upcase, :value => converted_rate}.to_json
+  
 end
 
 get '/price/:currency' do |currency|
@@ -184,7 +216,7 @@ get '/:exchange/:currency' do |exchange, currency|
   else
     response = {
       :error => true,
-      :description => "Unknown exchange!"
+      :description => "Unknown error!"
     }
     response.to_json
   end
