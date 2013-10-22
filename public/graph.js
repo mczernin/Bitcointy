@@ -1,3 +1,28 @@
+Date.prototype.getMinutesTwoDigits = function()
+{
+    var retval = this.getMinutes();
+    if (retval < 10)
+    {
+        return ("0" + retval.toString());
+    }
+    else
+    {
+        return retval.toString();
+    }
+}
+
+Date.prototype.getHoursTwoDigits = function()
+{
+    var retval = this.getHours();
+    if (retval < 10)
+    {
+        return ("0" + retval.toString());
+    }
+    else
+    {
+        return retval.toString();
+    }
+}
 $(function() {
   
   var updatePrice = function() {
@@ -5,7 +30,7 @@ $(function() {
       $("h2#price").fadeOut('fast',function(){
         var date = new Date();
         var ampm = date.getHours() >= 12 ? 'PM' : 'AM';
-        $("h2#price").html("1 BTC = $" + data.value + " (updated " + date.getHours() + ":" + date.getMinutes() + " " + ampm + ")")
+        $("h2#price").html("1 BTC = $" + data.value + " (updated " + date.getHoursTwoDigits() + ":" + date.getMinutesTwoDigits() + " " + ampm + ")")
       }).fadeIn("fast");
     });
   }
