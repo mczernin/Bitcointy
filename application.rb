@@ -24,7 +24,7 @@ end
 
 helpers do
 
-  EXCHANGES = ["blockchain", "mtgox", "btccharts", "coinbase"]
+  EXCHANGES = ["blockchain", "mtgox", "btccharts", "coinbase", "bitpay"]
 
 	def partial(page, options={})
 		haml page.to_sym, options.merge!(:layout => false)
@@ -73,6 +73,21 @@ helpers do
           @value = false
         else
           @value = (parsed_json["btc_to_#{currency.downcase}"]).to_f.round(2)
+        end
+      else
+        @value = false
+      end
+    when 'bitpay'
+      http_request = HTTParty.get("https://bitpay.com/api/rates")
+      if http_request.code == 200
+        parsed_json = JSON.parse(http_request.body)
+        
+        rate = parsed_json.map {|i| if i["code"] == "USD"; i; end }.compact[0]
+        
+        if rate == []
+          @value = false
+        else
+          @value = (rate["rate"]).to_f.round(2)
         end
       else
         @value = false
