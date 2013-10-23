@@ -23,11 +23,11 @@
 %h2 Graphs (Data from Blockchain)
 
 %h3 BTCs in circulation
-%canvas#circulation-chart{:width=>"970", :height=>"400", :"data-circulation" => btc_in_circulation.to_json, :"data-circulation-dates" => btc_in_circulation(true).to_json}
+%canvas#circulation-chart{:width=>"970", :height=>"400", :"data-circulation" => Bitcoin::btc_in_circulation.to_json, :"data-circulation-dates" => Bitcoin::btc_in_circulation(true).to_json}
 
 %h3 Market Price (USD)
-%canvas#market-price-chart{:width=>"970", :height=>"400", :"data-market-price" => market_price.to_json, :"data-market-price-dates" => market_price(true).to_json}
+%canvas#market-price-chart{:width=>"970", :height=>"400", :"data-market-price" => Bitcoin::market_price.to_json, :"data-market-price-dates" => Bitcoin::market_price(true).to_json}
 
 %h3 Number of transactions
-%canvas#transactions-chart{:width=>"970", :height=>"400", :"data-transactions" => number_of_transactions.to_json, :"data-transactions-dates" => number_of_transactions(true).to_json}
+%canvas#transactions-chart{:width=>"970", :height=>"400", :"data-transactions" => Bitcoin::number_of_transactions.to_json, :"data-transactions-dates" => Bitcoin::number_of_transactions(true).to_json}
 
