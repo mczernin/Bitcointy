@@ -103,7 +103,7 @@ module Bitcoin
           content << item["y"]
         end
       end
-      content - content.slice(0, content.length - 20)
+      content - content.slice(0, content.length - 50)
     end
   end
   
