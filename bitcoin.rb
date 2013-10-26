@@ -162,7 +162,7 @@ module Litecoin
       http_request = HTTParty.get("https://btc-e.com/api/2/ltc_usd/ticker")
       parsed_json = JSON.parse(http_request.body)   
       return_data = parsed_json["ticker"]["buy"]
-      return_data = convert_currency("USD", currency, return_data)
+      return_data = convert_currency("USD", currency, return_data) unless currency == "usd"
     end
     
     if http_request.code == 200
