@@ -84,6 +84,8 @@ get '/charts/:type' do |type|
     {:date => market_price(true), :values => market_price}.to_json
   when :transactions
     {:date => number_of_transactions(true), :values => number_of_transactions}.to_json
+  when :ltc
+    get_ltc_historical_data.to_json
   else
     {:error => true}.to_json
   end
