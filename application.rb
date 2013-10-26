@@ -6,6 +6,8 @@ require 'httparty'
 require 'json'
 require './bitcoin.rb'
 include Bitcoin
+include Bitcoin::General
+include Litecoin
 
 configure do
 	set :views, "#{File.dirname(__FILE__)}/views"
@@ -51,6 +53,24 @@ get '/charts/:type' do |type|
 
 end
 
+get '/ltc/:currency' do |currency|
+  content_type 'text/json'
+  price = get_ltc_price(currency)
+  
+  if !price.nan? || !price
+    {
+      :currency => currency.upcase,
+      :value => price
+    }.to_json
+  else  
+    {
+      :error => true,
+      :description => "Error! Probably a unexistant currency"
+    }.to_json
+  end
+end
+
+
 get '/convert/:amount/:currency' do |amount, currency|
   content_type 'text/json'
   avg_price = average_price(currency)
@@ -67,8 +87,6 @@ get '/convert/:amount/:currency' do |amount, currency|
       :description => "Error! Probably a unexistant currency"
     }.to_json
   end
-  
-  
 end
 
 get '/price/:currency' do |currency|

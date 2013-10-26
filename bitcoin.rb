@@ -89,7 +89,7 @@ module Bitcoin
   end
   
   def market_price(dates=false)
-    http_request = HTTParty.get("http://blockchain.info/charts/market-price?format=json")
+    http_request = HTTParty.get("https://blockchain.info/charts/market-price?format=json")
     if http_request.code == 200
       parsed_json = JSON.parse(http_request.body)
       return_data = parsed_json["values"]
@@ -136,5 +136,37 @@ module Bitcoin
       end
       content - content.slice(0, content.length - 60)  
     end
+  end
+  
+  module General
+    require 'net/http'
+ 
+    def convert_currency(from_curr = "EUR", to_curr = "USD", amount = 1000)
+      http_request = HTTParty.get("http://currency-api.appspot.com/api/#{from_curr}/#{to_curr}.json?key=9f29f3321bfe25be46d551c842fefb7cad385ce2&amount=#{amount}")
+      parsed_json = JSON.parse(http_request.body)
+      (parsed_json["amount"]).to_f.round(2)
+    end
+  end
+end
+
+module Litecoin
+  include Bitcoin
+  
+  def get_ltc_price(currency)
+    http_request = HTTParty.get("https://btc-e.com/api/2/ltc_usd/ticker")
+    parsed_json = JSON.parse(http_request.body)   
+    return_data = parsed_json["ticker"]["buy"]
+    return_data = convert_currency("USD", currency, return_data)
+      
+    if http_request.code == 200
+      if return_data.nil?
+        @value = false
+      else
+        @value = (return_data).to_f.round(2)
+      end
+    else
+      @value = false
+    end
+    @value
   end
 end
