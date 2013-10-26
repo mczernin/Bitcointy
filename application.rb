@@ -106,6 +106,24 @@ get '/convert/:amount/:currency' do |amount, currency|
   end
 end
 
+get '/convert_ltc/:amount/:currency' do |amount, currency|
+  content_type 'text/json'
+  avg_price = get_ltc_price(currency)
+  
+  converted_rate = (amount.to_f * avg_price).round(2)
+  if !converted_rate.nan?
+    {
+      :currency => currency.upcase,
+      :value => converted_rate
+    }.to_json
+  else  
+    {
+      :error => true,
+      :description => "Error! Probably a unexistant currency"
+    }.to_json
+  end
+end
+
 get '/price/:currency' do |currency|
   content_type 'text/plain'
   price = get_price(currency, "blockchain")
