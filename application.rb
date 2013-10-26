@@ -38,6 +38,23 @@ get '/' do
   haml :index
 end
 
+get '/app/:pass' do |password|
+  if password != "PabloBTCApp"
+    halt(404)
+  else
+    content_type 'text/json'
+    
+    return_array = [[], []]
+    ["USD", "EUR", "GBP", "CAD"].each do |curr|
+      return_array[0] << {:currency => curr, :value => average_price(curr)}
+    end
+    ["BTC", "USD", "EUR", "GBP", "CAD"].each do |curr|
+      return_array[1] << {:currency => curr, :value => get_ltc_price(curr)}
+    end
+    return_array.to_json
+  end
+end
+
 get '/charts/:type' do |type|
   content_type 'text/json'
   case type.to_sym
