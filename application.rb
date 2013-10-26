@@ -38,16 +38,24 @@ get '/' do
   haml :index
 end
 
-get '/app/:pass' do |password|
+get '/app/:exchange/:pass' do |exchange, password|
   if password != "PabloBTCApp"
     halt(404)
   else
     content_type 'text/json'
-    
     return_array = [[], []]
-    ["USD", "EUR", "GBP", "CAD"].each do |curr|
-      return_array[0] << {:currency => curr, :value => average_price(curr)}
+    
+    case exchange
+    when "mtgox", "coinbase", "blockchain"
+      ["USD", "EUR", "GBP", "CAD"].each do |curr|
+        return_array[0] << {:currency => curr, :value => get_price(curr, exchange)}
+      end
+    when "average"
+      ["USD", "EUR", "GBP", "CAD"].each do |curr|
+        return_array[0] << {:currency => curr, :value => average_price(curr)}
+      end
     end
+    
     ["BTC", "USD", "EUR", "GBP", "CAD"].each do |curr|
       return_array[1] << {:currency => curr, :value => get_ltc_price(curr)}
     end
