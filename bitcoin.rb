@@ -153,11 +153,18 @@ module Litecoin
   include Bitcoin
   
   def get_ltc_price(currency)
-    http_request = HTTParty.get("https://btc-e.com/api/2/ltc_usd/ticker")
-    parsed_json = JSON.parse(http_request.body)   
-    return_data = parsed_json["ticker"]["buy"]
-    return_data = convert_currency("USD", currency, return_data)
-      
+    case currency
+    when "btc"
+      http_request = HTTParty.get("https://btc-e.com/api/2/ltc_btc/ticker")
+      parsed_json = JSON.parse(http_request.body)   
+      return_data = parsed_json["ticker"]["buy"]      
+    else
+      http_request = HTTParty.get("https://btc-e.com/api/2/ltc_usd/ticker")
+      parsed_json = JSON.parse(http_request.body)   
+      return_data = parsed_json["ticker"]["buy"]
+      return_data = convert_currency("USD", currency, return_data)
+    end
+    
     if http_request.code == 200
       if return_data.nil?
         @value = false
