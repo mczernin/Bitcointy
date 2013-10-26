@@ -179,21 +179,25 @@ module Litecoin
   
   def get_ltc_historical_data
     http_request = HTTParty.get("http://www.cryptocoincharts.info/period-charts.php?period=alltime&resolution=day&pair=ltc-usd&market=btc-e")
-    require 'nokogiri'
-    doc = Nokogiri.HTML(http_request.body)
+    if http_request.code == 200
+      require 'nokogiri'
+      doc = Nokogiri.HTML(http_request.body)
     
-    data = {:date => [], :values => []}
+      data = {:date => [], :values => []}
 
-    doc.css('.table > tbody > tr').map do |row|
-      data[:date] << Date.parse(row.elements.to_a.values_at(0).map(&:text)[0]).strftime("%d/%m/%Y")
-      data[:values] << row.elements.to_a.values_at(4).map(&:text)[0].to_f
+      doc.css('.table > tbody > tr').map do |row|
+        data[:date] << Date.parse(row.elements.to_a.values_at(0).map(&:text)[0]).strftime("%d/%m/%Y")
+        data[:values] << row.elements.to_a.values_at(4).map(&:text)[0].to_f
+      end
+      data[:date].flatten!
+      data[:values].flatten!
+    
+      data[:date] = data[:date] - data[:date].slice(0, data[:date].length - 60)  
+      data[:values] = data[:values] - data[:values].slice(0, data[:values].length - 60)  
+    
+      data
+    else
+      {:date => [], :values => []}
     end
-    data[:date].flatten!
-    data[:values].flatten!
-    
-    data[:date] = data[:date] - data[:date].slice(0, data[:date].length - 60)  
-    data[:values] = data[:values] - data[:values].slice(0, data[:values].length - 60)  
-    
-    data
   end
 end
