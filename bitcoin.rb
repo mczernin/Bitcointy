@@ -203,3 +203,31 @@ module Litecoin
     end
   end
 end
+
+module Cryptocoin
+  def get_historical_data(pair)
+    pair = pair.gsub("_", "-")
+    http_request = HTTParty.get("http://www.cryptocoincharts.info/period-charts.php?period=alltime&resolution=day&pair=#{pair}&market=btc-e")
+    if http_request.code == 200
+      require 'nokogiri'
+      doc = Nokogiri.HTML(http_request.body)
+    
+      data = {:date => [], :values => []}
+
+      doc.css('.table > tbody > tr').map do |row|
+        data[:date] << Date.parse(row.elements.to_a.values_at(0).map(&:text)[0]).strftime("%d/%m/%Y")
+        data[:values] << row.elements.to_a.values_at(4).map(&:text)[0].to_f
+      end
+      data[:date].flatten!
+      data[:values].flatten!
+     
+      
+      data[:date] = data[:date][-60..data[:date].length]
+      data[:values] = data[:values][-60..data[:values].length]
+    
+      data
+    else
+      {:date => [], :values => []}
+    end
+  end
+end

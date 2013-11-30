@@ -8,6 +8,7 @@ require './bitcoin.rb'
 include Bitcoin
 include Bitcoin::General
 include Litecoin
+include Cryptocoin
 
 configure do
 	set :views, "#{File.dirname(__FILE__)}/views"
@@ -80,6 +81,16 @@ get '/app_prices/:pass' do |password|
     end
     
     return_array.to_json
+  end
+end
+
+get '/app_history/:pair/:pass' do |pair, password|
+  if password != "PabloBTCApp"
+    halt(404)
+  else
+    content_type 'text/json'
+    
+    get_historical_data(pair).to_json
   end
 end
 
