@@ -139,12 +139,14 @@ module Bitcoin
   end
   
   module General
-    require 'net/http'
+    require 'simple_currency'
  
     def convert_currency(from_curr = "EUR", to_curr = "USD", amount = 1000)
-      http_request = HTTParty.get("http://currency-api.appspot.com/api/#{from_curr}/#{to_curr}.json?key=9f29f3321bfe25be46d551c842fefb7cad385ce2&amount=#{amount}")
-      parsed_json = JSON.parse(http_request.body)
-      (parsed_json["amount"]).to_f.round(2)
+      
+      from = from_curr.downcase
+      to = to_curr.downcase
+      
+      amount.send(from.to_sym).send("to_#{to}".to_sym).to_f.round(2)
     end
   end
 end
