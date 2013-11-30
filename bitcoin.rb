@@ -220,6 +220,9 @@ module Cryptocoin
       end
       data[:date].flatten!
       data[:values].flatten!
+     
+      data[:date] = data[:date][-60..data[:date].length] if data[:date].length > 60
+      data[:values] = data[:values][-60..data[:values].length] if data[:values].length > 60
     
       data
     else
