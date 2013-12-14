@@ -911,4 +911,17 @@ JSON::ParserError - 757: unexpected token at '<!DOCTYPE html>
 	/Volumes/Datos/Usuarios/pablo/.rvm/gems/ruby-2.0.0-p247/gems/rack-1.5.2/lib/rack/handler/webrick.rb:60:in `service'
 	/Volumes/Datos/Usuarios/pablo/.rvm/rubies/ruby-2.0.0-p247/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
 	/Volumes/Datos/Usuarios/pablo/.rvm/rubies/ruby-2.0.0-p247/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
-	/Volumes/Datos/Usuarios/pablo/.rvm/rubies/ruby-2.0.0-p247/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+	/Volumes/Datos/Usuarios/pablo/.rvm/rubies/ruby-2.0.0-p247/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'[22247] 127.0.0.1 - - [14/Dec/2013 20:44:59] "GET /Chart.min.js HTTP/1.1" 200 - 0.0860
+[22247] 127.0.0.1 - - [14/Dec/2013 20:44:59] "GET /graph.js HTTP/1.1" 200 - 0.0924
+[22247] 127.0.0.1 - - [14/Dec/2013 20:45:05] "GET /average/usd?date=yes HTTP/1.1" 200 33 5.2074
+[22247] 127.0.0.1 - - [14/Dec/2013 20:45:08] "GET /average/usd?date=yes HTTP/1.1" 200 33 2.8673
+[22247] 127.0.0.1 - - [14/Dec/2013 20:45:12] "GET /Chart.min.js HTTP/1.1" 304 - 0.0006
+[22248] 127.0.0.1 - - [14/Dec/2013 20:44:59] "GET / HTTP/1.1" 200 6862 5.0085
+[22248] 127.0.0.1 - - [14/Dec/2013 20:44:59] "GET /main.css HTTP/1.1" 200 - 0.1637
+[22248] 127.0.0.1 - - [14/Dec/2013 20:45:00] "GET /favicon.ico HTTP/1.1" 404 448 0.0010
+[22248] 127.0.0.1 - - [14/Dec/2013 20:45:12] "GET / HTTP/1.1" 200 6862 6.4930
+[22248] 127.0.0.1 - - [14/Dec/2013 20:45:12] "GET /main.css HTTP/1.1" 304 - 0.0011
+[22248] 127.0.0.1 - - [14/Dec/2013 20:45:12] "GET /graph.js HTTP/1.1" 304 - 0.0005
+[22248] 127.0.0.1 - - [14/Dec/2013 20:45:18] "GET /average/usd?date=yes HTTP/1.1" 200 33 5.1693
+WARN: tilt autoloading 'redcarpet' in a non thread-safe way; explicit require 'redcarpet' suggested.
+WARN: tilt autoloading 'rdiscount' in a non thread-safe way; explicit require 'rdiscount' suggested.
