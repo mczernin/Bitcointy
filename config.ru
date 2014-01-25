@@ -9,4 +9,7 @@ log = File.new("log/sinatra.log", "a+")
 $stdout.reopen(log)
 $stderr.reopen(log)
 
+use Rack::Deflater
+
+
 run Sinatra::Application
