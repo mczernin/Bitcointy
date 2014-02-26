@@ -47,7 +47,7 @@ get '/app/:exchange/:pass' do |exchange, password|
     return_array = [[], []]
     
     case exchange
-    when "mtgox", "coinbase", "blockchain"
+    when "bitfinex", "coinbase", "blockchain", "mtgox"
       ["USD", "EUR", "GBP", "CAD"].each do |curr|
         return_array[0] << {:currency => curr, :value => get_price(curr, exchange)}
       end

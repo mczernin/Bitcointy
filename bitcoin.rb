@@ -1,5 +1,5 @@
 module Bitcoin
-  EXCHANGES = ["blockchain", "mtgox", "btccharts", "coinbase", "bitpay"]
+  EXCHANGES = ["blockchain", "bitfinex", "btccharts", "coinbase", "bitpay", "mtgox"]
   
   def get_price(currency, exchange)
     currency = currency.upcase
@@ -12,6 +12,17 @@ module Bitcoin
           @value = false
         else
           @value = (parsed_json[currency]["buy"]).to_f.round(2)
+        end
+      else
+        @value = false
+      end
+    when "bitfinex"
+      http_request = HTTParty.get("https://api.bitfinex.com/v1/ticker/btcusd")
+      if http_request.code == 200
+        parsed_json = JSON.parse(http_request.body)
+        @value = (parsed_json["last_price"]).to_f.round(2)
+        unless currency.downcase == "usd"
+          @value = Financial::convert_usd_currency(currency, @value)
         end
       else
         @value = false
@@ -227,6 +238,17 @@ module Cryptocoin
       data
     else
       {:date => [], :values => []}
+    end
+  end
+end
+
+module Financial
+  def self.convert_usd_currency(from, value)
+    http_request = HTTParty.get("http://openexchangerates.org/api/latest.json?app_id=dc9ec7c2b0704742b006f74c1f77c8c4")
+    if http_request.code == 200
+      parsed_json = JSON.parse(http_request.body)
+      to_rate = parsed_json["rates"][from.upcase].to_f
+      (value * to_rate).round(2)
     end
   end
 end
