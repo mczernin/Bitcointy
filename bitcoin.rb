@@ -100,21 +100,24 @@ module Bitcoin
   end
   
   def market_price(dates=false)
-    http_request = HTTParty.get("https://blockchain.info/charts/market-price?format=json")
+    http_request = HTTParty.get("http://www.cryptocoincharts.info/period-charts.php?period=alltime&resolution=day&pair=btc-usd&market=bitfinex")
     if http_request.code == 200
-      parsed_json = JSON.parse(http_request.body)
-      return_data = parsed_json["values"]
-      content = []
-      if dates
-        return_data.each do |item|
-          content << Time.at(item["x"]).strftime("%d/%m/%Y")
-        end
-      else
-        return_data.each do |item|
-          content << item["y"]
+      require 'nokogiri'
+      doc = Nokogiri.HTML(http_request.body)
+    
+      data = []
+
+      doc.css('.table > tbody > tr').map do |row|
+        if dates
+          data << Date.parse(row.elements.to_a.values_at(0).map(&:text)[0]).strftime("%d/%m/%Y")
+        else
+          data << row.elements.to_a.values_at(4).map(&:text)[0].to_f
         end
       end
-      content - content.slice(0, content.length - 50)
+      data.flatten!
+      data[-50..data.size]
+    else
+      []
     end
   end
   
